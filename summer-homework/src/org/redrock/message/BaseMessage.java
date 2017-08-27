@@ -1,7 +1,7 @@
 package org.redrock.message;
 
-import com.qq.weixin.mp.aes.AesException;
-import com.qq.weixin.mp.aes.WXBizMsgCrypt;
+import org.redrock.aes.AesException;
+import org.redrock.aes.WXBizMsgCrypt;
 import org.redrock.util.Const;
 
 import javax.servlet.http.HttpServletRequest;

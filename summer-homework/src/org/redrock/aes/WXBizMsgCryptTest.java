@@ -1,4 +1,4 @@
-package com.qq.weixin.mp.aes;
+package org.redrock.aes;
 
 import static org.junit.Assert.*;
 

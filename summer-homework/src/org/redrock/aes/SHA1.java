@@ -6,7 +6,7 @@
 
 // ------------------------------------------------------------------------
 
-package com.qq.weixin.mp.aes;
+package org.redrock.aes;
 
 import java.security.MessageDigest;
 import java.util.Arrays;

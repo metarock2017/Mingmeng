@@ -11,7 +11,7 @@
  * 需要导入架包commons-codec-1.9（或commons-codec-1.8等其他版本）
  * 官方下载地址：http://commons.apache.org/proper/commons-codec/download_codec.cgi
  */
-package com.qq.weixin.mp.aes;
+package org.redrock.aes;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -253,16 +253,14 @@ public class WXBizMsgCrypt {
 		String signature = SHA1.getSHA1(token, timeStamp, nonce, encrypt[1].toString());
 
 		// 和URL中的签名比较是否相等
-		 System.out.println("第三方收到URL中的签名：" + msgSignature);
-		 System.out.println("第三方校验签名：" + signature);
+		// System.out.println("第三方收到URL中的签名：" + msg_sign);
+		// System.out.println("第三方校验签名：" + signature);
 		if (!signature.equals(msgSignature)) {
 			throw new AesException(AesException.ValidateSignatureError);
 		}
 
 		// 解密
-		System.out.println(encrypt[1].toString());
 		String result = decrypt(encrypt[1].toString());
-		System.out.println(result);
 		return result;
 	}
 

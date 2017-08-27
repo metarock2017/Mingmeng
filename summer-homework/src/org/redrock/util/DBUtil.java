@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.Random;
 
 public class DBUtil {
-    public static final int JUDGE = 0;
+    private static final int JUDGE = 0;
 
     private Connection getconn() {
         Database database = Database.getInstance();
@@ -95,7 +95,7 @@ public class DBUtil {
             return responseText;
     }
 
-    public static int[] randomArray(int min, int max, int n) {
+    private static int[] randomArray(int min, int max, int n) {
         int len = max - min + 1;
 
         if (max < min || n > len) {
@@ -123,7 +123,7 @@ public class DBUtil {
     }
 
 
-    public boolean getIntoTheRoom(int RoomId, String user_id, int character_id) throws SQLException {
+    private boolean getIntoTheRoom(int RoomId, String user_id, int character_id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `users` " +
                 "(`user_id`,`room_id`,`character_id`) VALUES (?,?,?)");
         preparedStatement.setString(1, user_id);
@@ -270,8 +270,6 @@ public class DBUtil {
             nowNums=userNumSet.getInt("nums");
         while (maxNumSet.next())
             maxNums=maxNumSet.getInt("sum_peoples_nums");
-        System.out.println(nowNums);
-        System.out.println(maxNums);
         if(nowNums<maxNums)
             return true;
         return false;

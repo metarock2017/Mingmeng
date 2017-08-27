@@ -1,4 +1,4 @@
-package com.qq.weixin.mp.aes;
+package org.redrock.aes;
 
 @SuppressWarnings("serial")
 public class AesException extends Exception {

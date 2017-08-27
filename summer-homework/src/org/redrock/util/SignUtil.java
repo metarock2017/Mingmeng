@@ -1,5 +1,8 @@
 package org.redrock.util;
 
+import org.redrock.util.Const;
+import org.redrock.util.StringUtil;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

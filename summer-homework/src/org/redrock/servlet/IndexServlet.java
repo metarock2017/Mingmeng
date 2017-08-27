@@ -1,8 +1,9 @@
 package org.redrock.servlet;
 
-import com.qq.weixin.mp.aes.AesException;
-import com.qq.weixin.mp.aes.WXBizMsgCrypt;
+import org.redrock.aes.*;
 import org.apache.commons.lang3.StringUtils;
+import org.redrock.aes.AesException;
+import org.redrock.aes.WXBizMsgCrypt;
 import org.redrock.util.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -10,6 +11,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.redrock.util.EncryptUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,12 +33,7 @@ import java.util.Map;
 public class IndexServlet extends HttpServlet {
     //post请求处理
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String url = "http://2ceerk.natappfree.cc/FE.jsp";
         try {
-            Map<String, String[]> params = request.getParameterMap();
-////            for (String param : params.keySet()) {
-////                System.out.println(param);
-////            }
             String encodingAesKey = Const.EncodingAESKey;
             String token = Const.Token;
             String appId = Const.AppId;
@@ -81,6 +78,11 @@ public class IndexServlet extends HttpServlet {
             * */
             String toUser = result.get("FromUserName");
             if (msgSignature != null) {
+                /*
+                * 密文时用户逻辑,但是由于测试号的加解密似乎不行,所以这里并未对消息进行加解密处理,
+                * 预留了判断语句.
+                *
+                * */
                 String toUserName = result.get("ToUserName");
                 String encrypt = result.get("Encrypt");
                 String format = "<xml><ToUserName><![CDATA[%s]]></ToUserName><Encrypt><![CDATA[%s]]></Encrypt></xml>";
@@ -208,49 +210,6 @@ public class IndexServlet extends HttpServlet {
 
 
             }
-
-
-            //遍历result2
-
-
-            //System.out.println(toUser);
-//            if(encrypt == null || encrypt.equals("raw")){
-//
-//                //xml格式化
-//                String xml = "<xml>" +
-//                        "<ToUserName><![CDATA[%s]]></ToUserName>" +
-//                        "<FromUserName><![CDATA[%s]]></FromUserName>" +
-//                        "<CreateTime>%s</CreateTime>" +
-//                        "<MsgType><![CDATA[%s]]></MsgType>" +
-//                        "<Content><![CDATA[%s]]></Content>" +
-//                        "</xml>";
-//                String fromUser = result.get("ToUserName");
-//                String createTime = System.currentTimeMillis() / 1000 + "";
-//                String msgType = "text";
-//                String content = "hello";
-//                //格式化输出
-//                String res =String.format(xml, toUser, fromUser, createTime, msgType, content);
-//                //response相应输出
-//                response.getWriter().println(res);
-//            }
-//            else if (encrypt=="aes"){
-//                String xml = "<xml>" +
-//                        "<ToUserName><![CDATA[%s]]></ToUserName>" +
-//                        "<FromUserName><![CDATA[%s]]></FromUserName>" +
-//                        "<CreateTime>%s</CreateTime>" +
-//                        "<MsgType><![CDATA[%s]]></MsgType>" +
-//                        "<Content><![CDATA[%s]]></Content>" +
-//                        "</xml>";
-//                String fromUser = result.get("ToUserName");
-//                String createTime = System.currentTimeMillis() / 1000 + "";
-//                String msgType = "text";
-//                String content = "hello";
-//                //格式化输出
-//                String res =String.format(xml, toUser, fromUser, createTime, msgType, content);
-//                //response相应输出
-//                response.getWriter().println(res);
-//
-//            };
         } catch (ParserConfigurationException | SQLException | SAXException | AesException e) {
             e.printStackTrace();
         }

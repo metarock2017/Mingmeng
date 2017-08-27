@@ -1,10 +1,13 @@
 package org.redrock.component;
 
-import com.qq.weixin.mp.aes.AesException;
-import com.qq.weixin.mp.aes.WXBizMsgCrypt;
+
+import org.redrock.aes.AesException;
+import org.redrock.aes.WXBizMsgCrypt;
 import org.redrock.message.BaseMessage;
 import org.redrock.message.handle.BaseMessageHandle;
 import org.redrock.message.handle.TextMessageHandle;
+import org.redrock.util.SignUtil;
+import org.redrock.message.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.redrock.util.*;
